@@ -1,7 +1,3 @@
-Creating a detailed README file for your project can help others understand the purpose, methodology, and outcomes of your work. Below is a template for your README file:
-
----
-
 # Vaccine Usage Analysis and Prediction
 
 ## Project Overview
@@ -106,10 +102,3 @@ Future improvements can include:
 - `results/`: Results and visualizations.
 - `README.md`: Project documentation.
 
-## Contact
-
-For any questions or suggestions, please contact Thiruppugazhan S at thiruppugazhan@gmail.com.
-
----
-
-Feel free to customize the template further based on your specific project details and preferences.
