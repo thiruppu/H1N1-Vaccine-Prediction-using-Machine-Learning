@@ -1,7 +1,6 @@
 streamlit
 streamlit_option_menu
 pandas
-streamlit_extras.let_it_rain
 streamlit_extras.colored_header
 plotly.express
 pickle
