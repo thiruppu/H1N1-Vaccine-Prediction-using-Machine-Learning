@@ -1,7 +1,6 @@
 import streamlit as st
 import streamlit_option_menu as option
 import pandas as pd
-from streamlit_extras.let_it_rain import rain
 from streamlit_extras.colored_header import colored_header
 import plotly.express as px
 import pickle
@@ -56,14 +55,6 @@ def race_graph():
     return fig_m_t_count_bar
 
 st.set_page_config(layout="wide")
-
-def example():
-    rain(
-        emoji="💡",
-        font_size=54,
-        falling_speed=2,
-        animation_length="finite",
-    )
 
 def example1():
     colored_header(
@@ -281,7 +272,7 @@ if menu == "Graphs":
 if menu == "Prediction":
     st.title("Machine Learning Prediction 🦾")
     st.subheader("Please enter the following details:")
-    example()
+    
     col1_1, col1_2, col1_3, col1_4 = st.columns(4)
 
     with col1_2:
