@@ -85,6 +85,23 @@ def input_data(var1, var2, var3, var4, var5, var6, var7, var8, var9, var10, var1
     #print(prediction[0])
     return prediction[0] 
 
+data_dict = {
+    "columns": ["h1n1_worry", "dr_recc_h1n1_vacc", "has_health_insur", "is_h1n1_vacc_effective", "is_h1n1_risky", "sick_from_h1n1_vacc", "is_seas_vacc_effective", "is_seas_risky", "age_bracket", "qualification"],
+    "descriptions": [
+        "0=Not worried at all, 1=Not very worried, 2=Somewhat worried, 3=Very worried",
+        "0=No, 1=Yes",
+        "0=No, 1=Yes",
+        "0=Zero, 1=Thinks not effective at all, 2=Thinks it is not very effective, 3=Doesn't know if it is effective or not, 4=Thinks it is somewhat effective, 5=Thinks it is highly effective",
+        "0=Zero, 1=Thinks it is not very low risk, 2=Thinks it is somewhat low risk, 3=Don’t know if it is risky or not, 4=Thinks it is a somewhat high risk, 5=Thinks it is very highly risky",
+        "0=Zero, 1=Respondent not worried at all, 2=Respondent is not very worried, 3=Doesn't know, 4=Respondent is somewhat worried, 5=Respondent is very worried",
+        "0=Zero, 1=Thinks not effective at all, 2=Thinks it is not very effective, 3=Doesn't know if it is effective or not, 4=Thinks it is somewhat effective, 5=Thinks it is highly effective",
+        "0=Zero, 1=Thinks it is not very low risk, 2=Thinks it is somewhat low risk, 3=Doesn't know if it is risky or not, 4=Thinks it is somewhat high risk, 5=Thinks it is very highly risky",
+        "0=18 - 34 Years, 1=35 - 44 Years, 2=45 - 54 Years, 3=55 - 64 Years, 4=64+ Years",
+        "0=12 Years, 1=<12 Years, 2=College Graduate, 3=Some College, 4=Zero"
+    ]
+}
+
+
 st.markdown(
     """
     <style>
@@ -285,8 +302,31 @@ if menu == "Prediction":
         st.write(" ")
         prediction_button = st.button("Predict")
     
+    
     if prediction_button:
         prediction = input_data(var1, var2, var3, var4, var5, var6, var7, var8, var9, var10, var11)
         #st.subheader(prediction)
         if prediction is not None:
             st.header(f"The predicted likelihood of taking the H1N1 flu vaccine is: {'Yes (val=1)' if prediction == 1 else 'No (val=0)'}")
+
+    col3_1,col3_2,col3_3 = st.columns(3)
+    data_dict = {
+        "columns": ["h1n1_worry", "dr_recc_h1n1_vacc", "has_health_insur", "is_h1n1_vacc_effective", "is_h1n1_risky", "sick_from_h1n1_vacc", "is_seas_vacc_effective", "is_seas_risky", "age_bracket", "qualification"],
+        "descriptions": [
+            "0=Not worried at all, 1=Not very worried, 2=Somewhat worried, 3=Very worried",
+            "0=No, 1=Yes",
+            "0=No, 1=Yes",
+            "0=Zero, 1=Thinks not effective at all, 2=Thinks it is not very effective, 3=Doesn't know if it is effective or not, 4=Thinks it is somewhat effective, 5=Thinks it is highly effective",
+            "0=Zero, 1=Thinks it is not very low risk, 2=Thinks it is somewhat low risk, 3=Don’t know if it is risky or not, 4=Thinks it is a somewhat high risk, 5=Thinks it is very highly risky",
+            "0=Zero, 1=Respondent not worried at all, 2=Respondent is not very worried, 3=Doesn't know, 4=Respondent is somewhat worried, 5=Respondent is very worried",
+            "0=Zero, 1=Thinks not effective at all, 2=Thinks it is not very effective, 3=Doesn't know if it is effective or not, 4=Thinks it is somewhat effective, 5=Thinks it is highly effective",
+            "0=Zero, 1=Thinks it is not very low risk, 2=Thinks it is somewhat low risk, 3=Doesn't know if it is risky or not, 4=Thinks it is somewhat high risk, 5=Thinks it is very highly risky",
+            "0=18 - 34 Years, 1=35 - 44 Years, 2=45 - 54 Years, 3=55 - 64 Years, 4=64+ Years",
+            "0=12 Years, 1=<12 Years, 2=College Graduate, 3=Some College, 4=Zero"
+        ]
+    }
+    final_data = pd.DataFrame(data_dict)
+    
+    with col3_2:
+        st.dataframe(final_data)
+        
