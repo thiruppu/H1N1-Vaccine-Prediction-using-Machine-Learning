@@ -1,10 +1,8 @@
 streamlit
 streamlit_option_menu
 pandas
-streamlit_extras.colored_header
-plotly.express
+streamlit-extras
+plotly-express
 pickle
-sklearn.model_selection
-sklearn.ensemble
-sklearn.metrics
+scikit-learn
 numpy
