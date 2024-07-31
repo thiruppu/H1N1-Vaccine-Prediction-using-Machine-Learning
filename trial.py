@@ -9,7 +9,6 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score, classification_report
 import numpy as np
 
-server = app.server
 data_for_viz = pd.read_csv("D:\\Data Science\\Project 7\\dashboard_data.csv")
 
 def h1n1_worry_graph():
