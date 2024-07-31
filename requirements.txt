@@ -3,6 +3,5 @@ streamlit_option_menu
 pandas
 streamlit-extras
 plotly-express
-pickle
 scikit-learn
 numpy
