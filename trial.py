@@ -1,6 +1,7 @@
 import streamlit as st
 import streamlit_option_menu as option
 import pandas as pd
+from streamlit_extras.let_it_rain import rain
 from streamlit_extras.colored_header import colored_header
 import plotly.express as px
 import pickle
@@ -8,8 +9,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score, classification_report
 import numpy as np
-
-data_for_viz = pd.read_csv("dashboard_data.csv")
+data_for_viz = pd.read_csv("D:\\Data Science\\Project 7\\dashboard_data.csv")
 
 def h1n1_worry_graph():
     fig1 = data_for_viz["h1n1_worry"].value_counts().reset_index()
@@ -54,6 +54,14 @@ def race_graph():
     return fig_m_t_count_bar
 
 st.set_page_config(layout="wide")
+
+def example():
+    rain(
+        emoji="💡",
+        font_size=54,
+        falling_speed=2,
+        animation_length="finite",
+    )
 
 def example1():
     colored_header(
@@ -271,54 +279,138 @@ if menu == "Graphs":
 if menu == "Prediction":
     st.title("Machine Learning Prediction 🦾")
     st.subheader("Please enter the following details:")
-    
-    col1_1, col1_2, col1_3, col1_4 = st.columns(4)
+    #example()
+    col3_1,col3_2 = st.columns(2)
 
-    with col1_2:
-        var1 = st.number_input("Unique ID", key="unique_id",placeholder="1-100",min_value=0)
-        var2 = st.selectbox("H1N1 Worry (0-3)", options=[0, 1, 2, 3])
-        var3 = st.selectbox("Doctor Recommended H1N1 Vaccine", options=[0, 1])
-        var4 = st.selectbox("Has Health Insurance", options=[0, 1])
-        var5 = st.selectbox("Is H1N1 Vaccine Effective", options=[0, 1, 2, 3, 4, 5])
-        var6 = st.selectbox("Is H1N1 Risky", options=[0, 1, 2, 3, 4])
+    with col3_1:
+        var1 = st.number_input("Unique ID", key="unique_id",placeholder=" ",min_value=0)
+        var2 = st.selectbox("H1N1 Worry", options=["Not worried at all","Not very worried","Somewhat worried","Very worried"])
+        if var2 == "Not worried at all":
+            int_var2 = 0
+        if var2 == "Not very worried":
+            int_var2 = 1
+        if var2 == "Somewhat worried":
+            int_var2 = 2
+        if var2 == "Very worried":
+            int_var2 = 3
 
-    with col1_3:
-        var7 = st.selectbox("Sick from H1N1 Vaccine", options=[0, 1, 2, 3, 4, 5])
-        var8 = st.selectbox("Is Seasonal Vaccine Effective", options=[0, 1, 2, 3, 4, 5])
-        var9 = st.selectbox("Is Seasonal Risky", options=[0, 1, 2, 3, 4, 5])
-        var10 = st.selectbox("Age Bracket", options=[0, 1, 2, 3])
-        var11 = st.selectbox("Qualification", options=[0, 1, 2, 3, 4])
+        var3 = st.selectbox("Doctor Recommended H1N1 Vaccine", options=["No", "Yes"])
+        if var3 == "No":
+            int_var3 = 0
+        if var3 == "Yes":
+            int_var3 = 1
+
+        var4 = st.selectbox("Has Health Insurance", options=["No", "Yes"])
+        if var4 == "No":
+            int_var4 = 0
+        if var4 == "Yes":
+            int_var4 = 1
+
+
+        var5 = st.selectbox("Is H1N1 Vaccine Effective", options=["No Idea","Thinks not effective at all","Thinks it is not very effective","Doesn't know if it is effective or not","Thinks it is somewhat effective","Thinks it is highly effective"])
+        if var5 == "No Idea":
+            int_var5 = 0
+        if var5 == "Thinks not effective at all":
+            int_var5 = 1
+        if var5 == "Thinks it is not very effective":
+            int_var5 = 2
+        if var5 == "Doesn't know if it is effective or not":
+            int_var5 = 3
+        if var5 == "Thinks it is somewhat effective":
+            int_var5 = 4
+        if var5 == "Thinks it is highly effective":
+            int_var5 = 5
+
+
+        var6 = st.selectbox("Is H1N1 Risky", options=["Not Intrested to disclose", "Thinks it is not very low risk", "Thinks it is somewhat low risk", "Don’t know if it is risky or not","Thinks it is a somewhat high risk","Thinks it is very highly risky"])
+        if var6 == "Not Intrested to disclose":
+            int_var6 = 0
+        if var6 == "Thinks it is not very low risk":
+            int_var6 = 1
+        if var6 == "Thinks it is somewhat low risk":
+            int_var6 = 2
+        if var6 == "Don’t know if it is risky or not": 
+            int_var6 = 3
+        if var6 == "Thinks it is a somewhat high risk":
+            int_var6 = 4
+        if var6 == "Thinks it is very highly risky":
+            int_var6 = 5
+
+    with col3_2:
+        var7 = st.selectbox("Sick from H1N1 Vaccine", options=["Not Intrested to disclose","Respondent not worried at all","Respondent is not very worried", "Doesn't know","Respondent is somewhat worried","Respondent is very worried"])
+        if var7 == "Not Intrested to disclose":
+            int_var7 = 0
+        if var7 == "Respondent not worried at all":
+            int_var7 = 1
+        if var7 == "Respondent is not very worried":
+            int_var7 = 2
+        if var7 == "Doesn't know":
+            int_var7 = 3
+        if var7 == "Respondent is somewhat worried":
+            int_var7 = 4
+        if var7 == "Respondent is very worried":
+            int_var7 = 5
+
+
+        var8 = st.selectbox("Is Seasonal Vaccine Effective", options=["Not Intrested to disclose", "Thinks not effective at all", "Thinks it is not very effective", "Doesn't know if it is effective or not", "Thinks it is somewhat effective","Thinks it is highly effective"])
+        if var8 == "Not Intrested to disclose":
+            int_var8 = 0 
+        if var8 == "Thinks not effective at all":
+            int_var8 = 1 
+        if var8 == "Thinks it is not very effective":
+            int_var8 = 2
+        if var8 == "Doesn't know if it is effective or not": 
+            int_var8 = 3
+        if var8 == "Thinks it is somewhat effective":
+            int_var8 = 4
+        if var8 == "Thinks it is highly effective":
+            int_var8 = 5
+
+        var9 = st.selectbox("Is Seasonal Risky", options=["Not Intrested to disclose", "Thinks it is not very low risk","Thinks it is somewhat low risk","Doesn't know if it is risky or not", "Thinks it is somewhat high risk","Thinks it is very highly risky"])
+        if var9 == "Not Intrested to disclose":
+            int_var9 = 0
+        if var9 ==  "Thinks it is not very low risk":
+            int_var9 = 1
+        if var9 ==  "Thinks it is somewhat low risk":
+            int_var9 = 2
+        if var9 == "Doesn't know if it is risky or not":
+            int_var9 = 3
+        if var9 == "Thinks it is somewhat high risk":
+            int_var9 = 4
+        if var9 == "Thinks it is very highly risky":
+            int_var9 = 5
+        var10 = st.selectbox("Age Bracket", options=["18 - 34 Years","35 - 44 Years","45 - 54 Years","55 - 64 Years","64+ Years"])
+        if var10 == "18 - 34 Years":
+            int_var10 = 0
+        if var10 == "35 - 44 Years":
+            int_var10 = 1
+        if var10 == "45 - 54 Years":
+            int_var10 = 2
+        if var10 == "55 - 64 Years":
+            int_var10 = 3
+        if var10 == "64+ Years":
+            int_var10 = 4
+
+        var11 = st.selectbox("Qualification", options=["12 Years","<12 Years","College Graduate","Some College","Not Intrested to disclose"])
+        if var11 == "12 Years":
+            int_var11 = 0
+        if var11 == "<12 Years":
+            int_var11 = 1
+        if var11 == "College Graduate":
+            int_var11 = 2
+        if var11 == "Some College":
+            int_var11 = 3
+        if var11 == "Not Intrested to disclose":
+            int_var11 = 4
         
-    with col1_3:
+    with col3_2:
         st.write(" ")
         st.write(" ")
         prediction_button = st.button("Predict")
     
     
     if prediction_button:
-        prediction = input_data(var1, var2, var3, var4, var5, var6, var7, var8, var9, var10, var11)
+        prediction = input_data(var1,int_var2, int_var3, int_var4, int_var5, int_var6, int_var7, int_var8, int_var9, int_var10, int_var11)
         #st.subheader(prediction)
         if prediction is not None:
             st.header(f"The predicted likelihood of taking the H1N1 flu vaccine is: {'Yes (val=1)' if prediction == 1 else 'No (val=0)'}")
-
-    col3_1,col3_2,col3_3 = st.columns(3)
-    data_dict = {
-        "columns": ["h1n1_worry", "dr_recc_h1n1_vacc", "has_health_insur", "is_h1n1_vacc_effective", "is_h1n1_risky", "sick_from_h1n1_vacc", "is_seas_vacc_effective", "is_seas_risky", "age_bracket", "qualification"],
-        "descriptions": [
-            "0=Not worried at all, 1=Not very worried, 2=Somewhat worried, 3=Very worried",
-            "0=No, 1=Yes",
-            "0=No, 1=Yes",
-            "0=Zero, 1=Thinks not effective at all, 2=Thinks it is not very effective, 3=Doesn't know if it is effective or not, 4=Thinks it is somewhat effective, 5=Thinks it is highly effective",
-            "0=Zero, 1=Thinks it is not very low risk, 2=Thinks it is somewhat low risk, 3=Don’t know if it is risky or not, 4=Thinks it is a somewhat high risk, 5=Thinks it is very highly risky",
-            "0=Zero, 1=Respondent not worried at all, 2=Respondent is not very worried, 3=Doesn't know, 4=Respondent is somewhat worried, 5=Respondent is very worried",
-            "0=Zero, 1=Thinks not effective at all, 2=Thinks it is not very effective, 3=Doesn't know if it is effective or not, 4=Thinks it is somewhat effective, 5=Thinks it is highly effective",
-            "0=Zero, 1=Thinks it is not very low risk, 2=Thinks it is somewhat low risk, 3=Doesn't know if it is risky or not, 4=Thinks it is somewhat high risk, 5=Thinks it is very highly risky",
-            "0=18 - 34 Years, 1=35 - 44 Years, 2=45 - 54 Years, 3=55 - 64 Years, 4=64+ Years",
-            "0=12 Years, 1=<12 Years, 2=College Graduate, 3=Some College, 4=Zero"
-        ]
-    }
-    final_data = pd.DataFrame(data_dict)
-    
-    with col3_2:
-        st.dataframe(final_data)
-        
