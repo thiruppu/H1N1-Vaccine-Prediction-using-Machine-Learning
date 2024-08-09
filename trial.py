@@ -9,7 +9,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score, classification_report
 import numpy as np
-data_for_viz = pd.read_csv("D:\\Data Science\\Project 7\\dashboard_data.csv")
+data_for_viz = pd.read_csv("dashboard_data.csv")
 
 def h1n1_worry_graph():
     fig1 = data_for_viz["h1n1_worry"].value_counts().reset_index()
